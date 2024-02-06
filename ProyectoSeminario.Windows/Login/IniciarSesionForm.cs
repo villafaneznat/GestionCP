@@ -28,7 +28,7 @@ namespace ProyectoSeminario.Windows.Login
 
         private void IniciarSesionForm_Load(object sender, EventArgs e)
         {
-            usuariosList = _servicioUsuario.GetUsuarios();
+            usuariosList = _servicioUsuario.GetUsuarios(null);
         }
 
         private void IniciarSesionBtn_Click(object sender, EventArgs e)

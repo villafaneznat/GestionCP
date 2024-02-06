@@ -25,6 +25,7 @@ namespace ProyectoSeminario.Windows.Entidades
         private List<Profesional> profesionalesList;
 
         string textBusq = null;
+
         public FormProfesionales()
         {
             InitializeComponent();
@@ -59,6 +60,7 @@ namespace ProyectoSeminario.Windows.Entidades
             //FlowLayoutPanelProfesionales.Controls.Remove(ucProfesionales);
             //ucProfesionales.Dispose();
         }
+
         private void ProfesionalEdited(object sender, EventArgs e)
         {
             FormProfesionales_Load(sender, e);

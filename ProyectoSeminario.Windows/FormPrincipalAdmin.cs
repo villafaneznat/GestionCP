@@ -1,4 +1,5 @@
 ﻿using FontAwesome.Sharp;
+using Microsoft.VisualBasic.ApplicationServices;
 using ProyectoSeminario.Entidades;
 using ProyectoSeminario.Servicios.Interfaces;
 using ProyectoSeminario.Servicios.Servicios;
@@ -23,7 +24,7 @@ namespace ProyectoSeminario.Windows
         private Panel bordeIzquierdo;
         private Form formInterno;
         private readonly IServicioUsuarios _servicioUsuario;
-        private Usuario currentUser;
+        private static Usuario currentUser;
 
         public FormPrincipalAdmin(Usuario user)
         {
@@ -86,6 +87,7 @@ namespace ProyectoSeminario.Windows
                     UsuariosIconButton.Visible = false;
                     break;
             }
+
         }
 
         Color color = Color.FromArgb(23, 88, 115);
@@ -190,6 +192,11 @@ namespace ProyectoSeminario.Windows
             IniciarSesionForm frm = new IniciarSesionForm();
             frm.Show();
             Close();
+        }
+
+        public static Usuario GetUsuarioActual()
+        {
+            return currentUser;
         }
     
     }

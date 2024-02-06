@@ -13,10 +13,25 @@ namespace ProyectoSeminario.Servicios.Servicios
     public class ServicioUsuarios : IServicioUsuarios
     {
         private readonly IRepositorioUsuarios _repoUsuarios;
+
         public ServicioUsuarios()
         {
             _repoUsuarios = new RepositorioUsuarios();
         }
+
+        public void Borrar(Usuario usuario)
+        {
+            try
+            {
+                _repoUsuarios.Borrar(usuario);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool Exist(Usuario user)
         {
             try
@@ -29,9 +44,9 @@ namespace ProyectoSeminario.Servicios.Servicios
             }
         }
 
-        public List<Usuario> GetUsuarios()
+        public List<Usuario> GetUsuarios(string textBusq = null)
         {
-            return _repoUsuarios.GetUsuarios();
+            return _repoUsuarios.GetUsuarios(textBusq);
         }
 
         public void Guardar(Usuario user)

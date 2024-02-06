@@ -30,7 +30,7 @@
         {
             this.FlowLayoutPanelUsuarios = new System.Windows.Forms.FlowLayoutPanel();
             this.PanelNombreUser = new System.Windows.Forms.Panel();
-            this.txtBuscarProfesional = new System.Windows.Forms.TextBox();
+            this.txtBuscarUsuario = new System.Windows.Forms.TextBox();
             this.IconPictureUser = new FontAwesome.Sharp.IconPictureBox();
             this.AgregarUsuarioButton = new FontAwesome.Sharp.IconButton();
             this.PanelNombreUser.SuspendLayout();
@@ -51,24 +51,27 @@
             // PanelNombreUser
             // 
             this.PanelNombreUser.BackColor = System.Drawing.Color.White;
-            this.PanelNombreUser.Controls.Add(this.txtBuscarProfesional);
+            this.PanelNombreUser.Controls.Add(this.txtBuscarUsuario);
             this.PanelNombreUser.Controls.Add(this.IconPictureUser);
             this.PanelNombreUser.Location = new System.Drawing.Point(514, 9);
             this.PanelNombreUser.Name = "PanelNombreUser";
             this.PanelNombreUser.Size = new System.Drawing.Size(246, 45);
             this.PanelNombreUser.TabIndex = 14;
             // 
-            // txtBuscarProfesional
+            // txtBuscarUsuario
             // 
-            this.txtBuscarProfesional.BackColor = System.Drawing.Color.White;
-            this.txtBuscarProfesional.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtBuscarProfesional.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscarProfesional.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(162)))), ((int)(((byte)(161)))), ((int)(((byte)(161)))));
-            this.txtBuscarProfesional.Location = new System.Drawing.Point(44, 16);
-            this.txtBuscarProfesional.Name = "txtBuscarProfesional";
-            this.txtBuscarProfesional.Size = new System.Drawing.Size(203, 16);
-            this.txtBuscarProfesional.TabIndex = 9;
-            this.txtBuscarProfesional.Text = "Buscar usuario...";
+            this.txtBuscarUsuario.BackColor = System.Drawing.Color.White;
+            this.txtBuscarUsuario.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBuscarUsuario.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBuscarUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(162)))), ((int)(((byte)(161)))), ((int)(((byte)(161)))));
+            this.txtBuscarUsuario.Location = new System.Drawing.Point(44, 17);
+            this.txtBuscarUsuario.Name = "txtBuscarUsuario";
+            this.txtBuscarUsuario.Size = new System.Drawing.Size(203, 16);
+            this.txtBuscarUsuario.TabIndex = 9;
+            this.txtBuscarUsuario.Text = "Buscar usuario...";
+            this.txtBuscarUsuario.TextChanged += new System.EventHandler(this.txtBuscarUsuario_TextChanged);
+            this.txtBuscarUsuario.Enter += new System.EventHandler(this.txtBuscarUsuario_Enter);
+            this.txtBuscarUsuario.Leave += new System.EventHandler(this.txtBuscarUsuario_Leave);
             // 
             // IconPictureUser
             // 
@@ -128,7 +131,7 @@
 
         private System.Windows.Forms.FlowLayoutPanel FlowLayoutPanelUsuarios;
         private System.Windows.Forms.Panel PanelNombreUser;
-        private System.Windows.Forms.TextBox txtBuscarProfesional;
+        private System.Windows.Forms.TextBox txtBuscarUsuario;
         private FontAwesome.Sharp.IconPictureBox IconPictureUser;
         private FontAwesome.Sharp.IconButton AgregarUsuarioButton;
     }

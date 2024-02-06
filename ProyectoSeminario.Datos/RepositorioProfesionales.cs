@@ -22,6 +22,7 @@ namespace ProyectoSeminario.Datos
         {
             cadenaConexion = ConfigurationManager.ConnectionStrings["SqlConnection"].ToString();
         }
+
         public void Agregar(Profesional profesional)
         {
             using (var conn = new SqlConnection(cadenaConexion))
@@ -109,8 +110,6 @@ namespace ProyectoSeminario.Datos
                         {
                             comando.Parameters.Add("@textBusq", SqlDbType.NVarChar);
                             comando.Parameters["@textBusq"].Value = $"%{textBusq}%";
-                            //comando.Parameters.Add("@textBusq", SqlDbType.NVarChar);
-                            //comando.Parameters["@textBusq"].Value = $"%{textBusq}%";
                             using (var reader = comando.ExecuteReader())
                             {
                                 
@@ -239,5 +238,6 @@ namespace ProyectoSeminario.Datos
 
             return profesionesEliminadas;
         }
+
     }
 }

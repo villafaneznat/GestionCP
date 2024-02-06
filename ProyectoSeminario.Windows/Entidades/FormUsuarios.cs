@@ -32,7 +32,7 @@ namespace ProyectoSeminario.Windows.Entidades
 
         private void FormUsuarios_Load(object sender, EventArgs e)
         {
-            usersList = _servicioUsuarios.GetUsuarios();
+            usersList = _servicioUsuarios.GetUsuarios(null);
             ShowDataInLayout();
         }
 
@@ -55,6 +55,7 @@ namespace ProyectoSeminario.Windows.Entidades
         {
             FormUsuarios_Load(sender, e);
         }
+
         private void UserEdited(object sender, EventArgs e)
         {
             FormUsuarios_Load(sender, e);
@@ -81,42 +82,35 @@ namespace ProyectoSeminario.Windows.Entidades
             FormUsuarios_Load(sender, e);
         }
 
-        //private void txtBuscarProfesional_Leave(object sender, EventArgs e)
-        //{
-        //    if (string.IsNullOrWhiteSpace(txtBuscarProfesional.Text))
-        //    {
-        //        txtBuscarProfesional.Text = "Buscar profesional...";
-        //    }
-        //}
+        private void txtBuscarUsuario_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtBuscarUsuario.Text))
+            {
+                txtBuscarUsuario.Text = "Buscar usuario...";
+            }
+        }
 
-        //private void txtBuscarProfesional_Enter(object sender, EventArgs e)
-        //{
-        //    if (txtBuscarProfesional.Text == "Buscar profesional...")
-        //    {
-        //        txtBuscarProfesional.Text = "";
-        //    }
-        //}
+        private void txtBuscarUsuario_Enter(object sender, EventArgs e)
+        {
+            if (txtBuscarUsuario.Text == "Buscar usuario...")
+            {
+                txtBuscarUsuario.Text = "";
+            }
+        }
 
-        //private void AgregarProfesionalButton_Click(object sender, EventArgs e)
-        //{
-        //    FormProfesionalAE frm = new FormProfesionalAE(_servicioProfesionales);
-        //    DialogResult dr = frm.ShowDialog(this);
-        //    FormProfesionales_Load(sender, e);
-        //}
-
-        //private void txtBuscarProfesional_TextChanged(object sender, EventArgs e)
-        //{
-        //    if (txtBuscarProfesional.Text == "Buscar profesional...")
-        //    {
-        //        profesionalesList = _servicioProfesionales.GetProfesionales(textBusq = null);
-        //    }
-        //    else
-        //    {
-        //        textBusq = txtBuscarProfesional.Text;
-        //        profesionalesList = _servicioProfesionales.GetProfesionales(textBusq);
-        //        //ShowDataInGrid();        
-        //    }
-        //    ShowDataInLayout();
-        //}
+        private void txtBuscarUsuario_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBuscarUsuario.Text == "Buscar usuario...")
+            {
+                usersList = _servicioUsuarios.GetUsuarios(textBusq = null);
+            }
+            else
+            {
+                textBusq = txtBuscarUsuario.Text;
+                usersList = _servicioUsuarios.GetUsuarios(textBusq);
+                //ShowDataInGrid();        
+            }
+            ShowDataInLayout();
+        }
     }
 }

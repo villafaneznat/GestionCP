@@ -43,8 +43,7 @@ namespace ProyectoSeminario.Windows.Agregar
         {
             base.OnLoad(e);
             if (esEdicion)
-            {
-                
+            {         
                 txtNombreProfesional.Text = profesional.Nombre;
                 txtApellidoProfesional.Text = profesional.Apellido;
                 txtDNIProfesional.Text = profesional.DNI.ToString();
@@ -380,5 +379,6 @@ namespace ProyectoSeminario.Windows.Agregar
                 PsicologoCheckBox.Enabled = true;
             }
         }
+
     }
 }

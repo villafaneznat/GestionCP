@@ -15,6 +15,7 @@ namespace ProyectoSeminario.Datos
     public class RepositorioUsuarios : IRepositorioUsuarios
     {
         private string cadenaConexion;
+
         public RepositorioUsuarios()
         {
             cadenaConexion = ConfigurationManager.ConnectionStrings["SqlConnection"].ToString();
@@ -34,9 +35,27 @@ namespace ProyectoSeminario.Datos
             }
         }
 
+        public void Borrar(Usuario usuario)
+        {
+            using (var conn = new SqlConnection(cadenaConexion))
+            {
+                string deleteQuery = "DELETE FROM Usuarios WHERE IdUser=@IdUser";
+                conn.Execute(deleteQuery, new { usuario.IdUser });
+            }
+        }
+
         public void Editar(Usuario user)
         {
-            throw new NotImplementedException();
+            using (var conn = new SqlConnection(cadenaConexion))
+            {
+                string updateQuery = @"UPDATE Usuarios 
+                    SET UserName=@UserName, 
+                    Password=@Password, 
+					IdRol=@IdRol
+                    WHERE IdUser=@IdUser";
+                var parametros = new { UserName = user.UserName, Password = user.Password, IdRol = (int)user.Rol, IdUser = user.IdUser };
+                conn.Execute(updateQuery, parametros);
+            }
         }
 
         public bool Exist(Usuario user)
@@ -61,7 +80,7 @@ namespace ProyectoSeminario.Datos
             return cantidad > 0;
         }
 
-        public List<Usuario> GetUsuarios()
+        public List<Usuario> GetUsuarios(string textBusq = null)
         {
             try
             {
@@ -69,33 +88,72 @@ namespace ProyectoSeminario.Datos
                 using (var con = new SqlConnection(cadenaConexion))
                 {
                     con.Open();
-                    string selectQuery = "SELECT IdUser, UserName, Password, IdRol FROM Usuarios";
-                    using (var comando = new SqlCommand(selectQuery, con))
+                    string selectQuery;
+                    if (textBusq != null)
                     {
-                        using (var reader = comando.ExecuteReader())
+                        selectQuery = @"SELECT IdUser, UserName, Password, IdRol FROM Usuarios
+							WHERE UPPER(UserName) LIKE @textBusq";
+                        using (var comando = new SqlCommand(selectQuery, con))
                         {
-                            while (reader.Read())
+                            comando.Parameters.Add("@textBusq", SqlDbType.NVarChar);
+                            comando.Parameters["@textBusq"].Value = $"%{textBusq}%";
+                            using (var reader = comando.ExecuteReader())
                             {
-                                Usuario usuario = new Usuario()
-                                {
-                                    IdUser = reader.GetInt32(0),
-                                    UserName = reader.GetString(1),
-                                    Password = reader.GetString(2)
-                                };
-                                if (reader.GetInt32(3) == 1)
-                                {
-                                    usuario.Rol = Rol.Administrador;
-                                }
-                                else
-                                {
-                                    usuario.Rol = Rol.Profesional;
 
-                                }
+                                while (reader.Read())
+                                {
+                                    Usuario usuario = new Usuario()
+                                    {
+                                        IdUser = reader.GetInt32(0),
+                                        UserName = reader.GetString(1),
+                                        Password = reader.GetString(2)
+                                    };
+                                    if (reader.GetInt32(3) == 1)
+                                    {
+                                        usuario.Rol = Rol.Administrador;
+                                    }
+                                    else
+                                    {
+                                        usuario.Rol = Rol.Profesional;
 
-                                lista.Add(usuario);
+                                    }
+
+                                    lista.Add(usuario);
+                                }
                             }
                         }
                     }
+                    else
+                    {
+                        selectQuery = "SELECT IdUser, UserName, Password, IdRol FROM Usuarios";
+                        using (var comando = new SqlCommand(selectQuery, con))
+                        {
+                            using (var reader = comando.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    Usuario usuario = new Usuario()
+                                    {
+                                        IdUser = reader.GetInt32(0),
+                                        UserName = reader.GetString(1),
+                                        Password = reader.GetString(2)
+                                    };
+                                    if (reader.GetInt32(3) == 1)
+                                    {
+                                        usuario.Rol = Rol.Administrador;
+                                    }
+                                    else
+                                    {
+                                        usuario.Rol = Rol.Profesional;
+
+                                    }
+
+                                    lista.Add(usuario);
+                                }
+                            }
+                        }
+                    }
+
                 }
                 return lista;
             }
@@ -150,5 +208,6 @@ namespace ProyectoSeminario.Datos
                 throw;
             }
         }
+
     }
 }

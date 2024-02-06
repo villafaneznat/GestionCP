@@ -179,6 +179,7 @@
             this.EditUserBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.EditUserBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.EditUserBtn.UseVisualStyleBackColor = false;
+            this.EditUserBtn.Click += new System.EventHandler(this.EditUserBtn_Click);
             // 
             // VerPassButton
             // 
@@ -217,6 +218,7 @@
             this.DeleteUserBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.DeleteUserBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.DeleteUserBtn.UseVisualStyleBackColor = false;
+            this.DeleteUserBtn.Click += new System.EventHandler(this.DeleteUserBtn_Click);
             // 
             // PasswordTxt
             // 

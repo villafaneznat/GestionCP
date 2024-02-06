@@ -37,6 +37,29 @@ namespace ProyectoSeminario.Windows.AgregarEditar
             esEdicion = edicion;
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            if (esEdicion)
+            {
+                UserNameTXT.Text = user.UserName;
+                PassTXT.Text = user.Password;
+                MarcarRol();
+            }
+        }
+
+        private void MarcarRol()
+        {
+            if ((int)user.Rol == 1)
+            {
+                AdministradorRadioButton.Checked = true;
+            }
+            else
+            {
+                ProfesionalRadioButton.Checked = true;
+            }
+        }
+
         private void GuardarBtn_Click(object sender, EventArgs e)
         {
             if (ValidarDatos())
@@ -92,6 +115,7 @@ namespace ProyectoSeminario.Windows.AgregarEditar
                 }
             }
         }
+
         private Rol ObtenerRol()
         {
             Rol rol;
@@ -140,5 +164,6 @@ namespace ProyectoSeminario.Windows.AgregarEditar
         {
             DialogResult = DialogResult.Cancel;
         }
+
     }
 }
